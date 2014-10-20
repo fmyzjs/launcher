@@ -1,8 +1,8 @@
 var App = App || {};
 
 App.API_ROOT = '/api/v1/';
-App.pusher = new Pusher('cea6dff5fc1f38a2d45d');
-App.INTERCOM_APP_ID = 'tf1udglv';
+App.pusher = new Pusher('3e3f5adc573b8ededb38');
+App.INTERCOM_APP_ID = 'gkg14vja';
 
 // Models
 App.Project = Backbone.Model.extend({});
@@ -213,11 +213,11 @@ App.EmbedView = Backbone.View.extend({
     },
 
     generateImgURL: function(size, color) {
-        return 'http://launcher.appsembler.com/static/img/buttons/btn-' + size + '-' + color + '.png';
+        return 'http://dk.idefs.net:8000/static/img/buttons/btn-' + size + '-' + color + '.png';
     },
 
     generateAppURL: function(slug) {
-        return 'http://launcher.appsembler.com/' + slug + '/';
+        return 'http://dk.idefs.net:8000/' + slug + '/';
     }
 });
 

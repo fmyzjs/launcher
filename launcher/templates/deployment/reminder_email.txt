@@ -5,7 +5,7 @@ You have {{ remaining_minutes }} minutes left, it expires on {{ expiration_time|
 Here's some info about your app in case you forgot:
 Application URL: {{ app_url }}
 
-App status URL: http://launch.appsembler.com{{ status_url }}
+App status URL: {{ status_url }}
 
 {% if username or password %}
 Authentication details:

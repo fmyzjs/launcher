@@ -1,6 +1,6 @@
 Application URL: {{ app_url }}
 
-App status URL: http://launch.appsembler.com{{ status_url }}
+App status URL: {{ status_url }}
 
 {% if username or password %}
 Authentication details:

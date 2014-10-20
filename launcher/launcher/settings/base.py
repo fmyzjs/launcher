@@ -21,13 +21,13 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Nate Aune', 'nate@appsembler.com'),
-    ('Filip Jukic', 'filip@appsembler.com'),
+    ('Jason Zhu', 'root@idefs.net'),
+    ('fmyzjs', 'fmyzjs@gmail.com'),
 )
 
 MANAGERS = ADMINS
 
-DEFAULT_FROM_EMAIL = 'support@appsembler.com'
+DEFAULT_FROM_EMAIL = 'support@idefs.net'
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
 DATABASES = {
@@ -45,7 +45,7 @@ DATABASES = {
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = [
-    '.appsembler.com',
+    '.idefs.net',
     '162.243.216.108',
     '127.0.0.1',
     '192.168.33.10',
@@ -290,6 +290,9 @@ PIPELINE_COMPILERS = (
 # npm install -g uglify-js
 PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.uglifyjs.UglifyJSCompressor'
 PIPELINE_UGLIFYJS_BINARY = '/usr/bin/env uglifyjs'
+
+# Server config
+BASE_URL = 'http://dk.idefs.net:8000'
 
 # Celery config
 BROKER_URL = 'django://'

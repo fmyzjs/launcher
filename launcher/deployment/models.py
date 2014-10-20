@@ -141,9 +141,9 @@ class Deployment(models.Model):
         }
         if "edx" in self.project.name.lower():
             edx_env = []
-            edx_env.append("EDX_LMS_BASE=lms-{0}.demo.appsembler.com".format(self.deploy_id))
-            edx_env.append("EDX_PREVIEW_LMS_BASE=lms-{0}.demo.appsembler.com".format(self.deploy_id))
-            edx_env.append("EDX_CMS_BASE=cms-{0}.demo.appsembler.com".format(self.deploy_id))
+            edx_env.append("EDX_LMS_BASE=lms-{0}.demo.idefs.net".format(self.deploy_id))
+            edx_env.append("EDX_PREVIEW_LMS_BASE=lms-{0}.demo.idefs.net".format(self.deploy_id))
+            edx_env.append("EDX_CMS_BASE=cms-{0}.demo.idefs.net".format(self.deploy_id))
             edx_env.append("INTERCOM_APP_ID={0}".format(settings.INTERCOM_EDX_APP_ID))
             edx_env.append("INTERCOM_APP_SECRET={0}".format(settings.INTERCOM_EDX_APP_SECRET))
             edx_env.append("INTERCOM_USER_EMAIL={0}".format(self.email))
@@ -171,7 +171,7 @@ class Deployment(models.Model):
             app_ids = []
             domains = []
             for port, hostname in zip(ports, hostnames):
-                domain_name = "{0}.demo.appsembler.com".format(self.deploy_id)
+                domain_name = "{0}.demo.idefs.net".format(self.deploy_id)
                 if hostname:
                     domain_name = "{0}-{1}".format(hostname, domain_name)
                 domains.append(domain_name)
@@ -231,7 +231,7 @@ class Deployment(models.Model):
                           name='app_deploy_complete',
                           app_url=self.url.replace(" ", "\n"),
                           app_name=self.project.name,
-                          status_url="http://launcher.appsembler.com" + reverse('deployment_detail', kwargs={'deploy_id': self.deploy_id}),
+                          status_url=settings.BASE_URL + reverse('deployment_detail', kwargs={'deploy_id': self.deploy_id}),
                           trial_duration=self.project.trial_duration,
                           username=self.project.default_username,
                           password=self.project.default_password
@@ -243,8 +243,8 @@ class Deployment(models.Model):
             send_mail(
                 "Deployment failed: {0}".format(self.deploy_id),
                 "Error log link: {0}".format(reverse('admin:deployment_deploymenterrorlog_change', args=(error_log.id,))),
-                'info@appsembler.com',
-                ['filip@appsembler.com', 'nate@appsembler.com']
+                'info@idefs.net',
+                map(lambda email: email[1], settings.ADMINS)
 
             )
             instance[self.deploy_id].trigger('deployment_failed', {
@@ -260,7 +260,7 @@ class Deployment(models.Model):
                 name='app_expiring_soon',
                 app_name=self.project.name,
                 app_url=self.url.replace(" ", "\n"),
-                status_url="http://launcher.appsembler.com" + reverse('deployment_detail', kwargs={'deploy_id': self.deploy_id}),
+                status_url=settings.BASE_URL + reverse('deployment_detail', kwargs={'deploy_id': self.deploy_id}),
                 remaining_minutes=self.get_remaining_minutes(),
                 expiration_time=timezone.localtime(self.expiration_time).isoformat()
             )
