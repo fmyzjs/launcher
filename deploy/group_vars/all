@@ -1,6 +1,6 @@
 # application config
 app_name: launcher
-git_repo_url: https://github.com/appsembler/launcher.git
+git_repo_url: https://github.com/fmyzjs/launcher.git
 git_repo_branch: master
 git_repo_dir: /opt/launcher
 server_name: launch.idefs.net

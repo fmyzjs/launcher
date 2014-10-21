@@ -292,7 +292,8 @@ PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.uglifyjs.UglifyJSCompressor'
 PIPELINE_UGLIFYJS_BINARY = '/usr/bin/env uglifyjs'
 
 # Server config
-BASE_URL = 'http://dk.idefs.net:8000'
+BASE_URL = get_env_variable('BASE_URL')
+APP_DOMAIN = get_env_variable('APP_DOMAIN')
 
 # Celery config
 BROKER_URL = 'django://'
