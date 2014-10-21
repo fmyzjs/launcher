@@ -172,3 +172,5 @@ secret_vars.yml
 collected_static/
 components/
 celerybeat-schedule
+launcher/celerybeat-schedule.db
+launcher/node_modules/
