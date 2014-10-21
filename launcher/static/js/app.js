@@ -2,7 +2,7 @@ var App = App || {};
 
 App.API_ROOT = '/api/v1/';
 App.pusher = new Pusher('3e3f5adc573b8ededb38');
-App.INTERCOM_APP_ID = 'gkg14vja';
+App.INTERCOM_APP_ID = '';
 
 // Models
 App.Project = Backbone.Model.extend({});
@@ -86,12 +86,12 @@ App.DeployFormView = Backbone.View.extend({
         deploy_id = deploy_id.replace(/[. -]/g, '');
         app_data['deploy_id'] = deploy_id;
 
-        window.Intercom('boot', {
-                app_id: App.INTERCOM_APP_ID,
-                email: email,
-                user_agent_data: navigator.userAgent
-            }
-        );
+        // window.Intercom('boot', {
+        //         app_id: App.INTERCOM_APP_ID,
+        //         email: email,
+        //         user_agent_data: navigator.userAgent
+        //     }
+        // );
 
         var deploy = new App.Deployment({
             project: project_uri,
@@ -129,12 +129,12 @@ App.DeployStatusView = Backbone.View.extend({
     render: function(){
         var html = this.template(this.app_data);
         this.$el.html(html);
-        Intercom('update');
+        //Intercom('update');
     },
     updateInfoStatus: function(data) {
         $("#info-message").text(data.message);
         $('.progress-bar').width(data.percent + "%").attr("aria-valuenow", data.percent);
-        Intercom('update');
+        //Intercom('update');
     },
 
     deploymentSuccess: function(data) {
@@ -159,7 +159,7 @@ App.DeployStatusView = Backbone.View.extend({
                             '</div>';
             $(auth_data).insertAfter($info);
         }
-        Intercom('update');
+        //Intercom('update');
 },
 
     deploymentFail: function(data) {

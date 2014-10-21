@@ -14,16 +14,16 @@ from django.template.defaultfilters import slugify
 from django.utils import timezone
 
 from customerio import CustomerIO
-from intercom import Event, Intercom, User
 from model_utils.fields import StatusField
 from model_utils import Choices
 from .tasks import deploy
 
 logger = logging.getLogger(__name__)
-
-Intercom.app_id = settings.INTERCOM_APP_ID
-Intercom.api_key = settings.INTERCOM_API_KEY
-Intercom.api_endpoint = 'https://api.intercom.io/'
+if settings.USE_INTERCOM:
+    from intercom import Event, Intercom, User
+    Intercom.app_id = settings.INTERCOM_APP_ID
+    Intercom.api_key = settings.INTERCOM_API_KEY
+    Intercom.api_endpoint = 'https://api.intercom.io/'
 
 
 class Project(models.Model):
@@ -95,9 +95,10 @@ class Deployment(models.Model):
         super(Deployment, self).save(*args, **kwargs)
         if self.status == 'Deploying':
             deploy.delay(self)
-            User.create(
-                email=self.email
-            )
+            if settings.USE_INTERCOM:
+                User.create(
+                    email=self.email
+                )
 
     def get_remaining_seconds(self):
         if self.expiration_time and self.expiration_time > timezone.now():
@@ -217,15 +218,16 @@ class Deployment(models.Model):
                 'username': self.project.default_username,
                 'password': self.project.default_password
             })
-            Event.create(
-                event_name="deployed_app",
-                email=self.email,
-                metadata={
-                    'app_name': self.project.name,
-                    'app_url': self.url,
-                    'deploy_id': self.deploy_id,
-                }
-            )
+            if settings.USE_INTERCOM:
+                Event.create(
+                    event_name="deployed_app",
+                    email=self.email,
+                    metadata={
+                        'app_name': self.project.name,
+                        'app_url': self.url,
+                        'deploy_id': self.deploy_id,
+                    }
+                )
             if self.email:
                 cio.track(customer_id=self.email,
                           name='app_deploy_complete',
