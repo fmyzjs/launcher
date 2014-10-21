@@ -213,11 +213,11 @@ App.EmbedView = Backbone.View.extend({
     },
 
     generateImgURL: function(size, color) {
-        return 'http://dk.idefs.net:8000/static/img/buttons/btn-' + size + '-' + color + '.png';
+        return 'http://edustack.bistu.edu.cn/static/img/buttons/btn-' + size + '-' + color + '.png';
     },
 
     generateAppURL: function(slug) {
-        return 'http://dk.idefs.net:8000/' + slug + '/';
+        return 'http://edustack.bistu.edu.cn/' + slug + '/';
     }
 });
 
