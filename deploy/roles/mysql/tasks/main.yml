@@ -3,7 +3,7 @@
   with_items:
     - python-mysqldb
     - mysql-server-5.5
-    - libmysqlclient-dev
+    - libmysqld-dev
 
 - name: setup the launcher db user
   mysql_user: >
