@@ -22,11 +22,6 @@ INSTALLED_APPS += (
     'raven.contrib.django.raven_compat',
 )
 
-# Sentry/Raven config
-RAVEN_CONFIG = {
-    'dsn': get_env_variable('SENTRY_DSN'),
-    'timeout': 3,
-}
 
 CACHES = {
     'default': {
