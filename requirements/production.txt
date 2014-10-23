@@ -1,5 +1,4 @@
 -r base.txt
-psycopg2==2.5.4
 celery-with-redis==3.0
 flower==0.6.0
 newrelic==2.14.0.11

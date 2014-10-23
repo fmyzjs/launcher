@@ -1,0 +1,17 @@
+- name: install packages needed for single server
+  apt: pkg={{item}} install_recommends=yes state=present
+  with_items:
+  - python-mysqldb
+  - mysql-server-5.5
+
+- name: setup the launcher db user
+  mysql_user: >
+    name={{ mysql_user }}
+    password={{ mysql_password }}
+    priv='{{ mysql_db_name }}.*:ALL'
+
+- name: create a database for launcher
+  mysql_db: >
+    db={{ mysql_db_name }}
+    state=present
+    encoding=utf8
