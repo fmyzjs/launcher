@@ -1,5 +1,4 @@
 ---
-sudo apt-get install zlib1g-dev
 - name: install packages needed for single server
   apt: pkg={{item}} install_recommends=yes state=present
   with_items:
