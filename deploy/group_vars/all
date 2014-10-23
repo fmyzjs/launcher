@@ -1,16 +1,15 @@
 # application config
 app_name: launcher
 git_repo_url: https://github.com/fmyzjs/launcher.git
-git_repo_branch: master
+git_repo_branch: edustack
 git_repo_dir: /opt/launcher
-server_name: launch.idefs.net
+server_name: edustack.bistu.edu.cn
 venv_dir: /opt/venv
 
 # memcached config
 memcached_memory: 16
 
 # django static files
-cloudfront_url: "d1s9voh9zis26j.cloudfront.net" # without the http(s) part and the trailing slash
 django_media_dir: "{{git_repo_dir}}/launcher/media"
 django_project_dir: "{{git_repo_dir}}/launcher"
 django_static_dir: "{{git_repo_dir}}/launcher/collected_static"
