@@ -3,7 +3,12 @@
   pip: name=supervisor state=latest
 
 - name: Copy supervisor configuration file
-  template: src=supervisord.conf dest=/etc/supervisord.conf
+  template: src=supervisord.conf dest=/etc/supervisor/supervisord.conf
+  notify:
+    - reload supervisor config
+
+- name: Copy launcher configuration file
+  template: src=launcher.conf dest=/etc/supervisor/launcher.conf
   notify:
     - reload supervisor config
 
