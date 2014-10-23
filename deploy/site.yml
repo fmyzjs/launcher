@@ -10,6 +10,7 @@
     - pythondev
     - mysql
     - memcached
+    - newrelic
     - nginx
     - uwsgi
     - redis
