@@ -1,4 +1,9 @@
 ---
+sudo apt-get install zlib1g-dev
+- name: install packages needed for single server
+  apt: pkg={{item}} install_recommends=yes state=present
+  with_items:
+    - zlib1g-dev
 
 - name: Clone app repo
   git: repo={{git_repo_url}} dest={{git_repo_dir}} version={{git_repo_branch}}
