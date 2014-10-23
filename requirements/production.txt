@@ -1,4 +1,5 @@
 -r base.txt
+MySQL-python
 celery-with-redis==3.0
 flower==0.6.0
 newrelic==2.14.0.11
