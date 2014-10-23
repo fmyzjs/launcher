@@ -212,7 +212,7 @@
         "name": "edX LMS",
         "survey_form_url": "",
         "env_vars": "MANDRILL_API_KEY=PbKaXYXtFA65okg8xSpLHg",
-        "image_name": "appsembler/edx-docker-microsite",
+        "image_name": "appsembler/edx-lite",
         "trial_duration": 60,
         "github_url": "https://github.com/appsembler/edx-platform/tree/fjukic/docker",
         "default_username": "",
