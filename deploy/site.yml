@@ -10,9 +10,9 @@
     - pythondev
     - mysql
     - memcached
-    - newrelic
     - nginx
     - uwsgi
     - redis
     - app_deployment
+    - newrelic
     - supervisor

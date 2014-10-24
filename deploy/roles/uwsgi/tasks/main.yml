@@ -4,6 +4,6 @@
   pip: name=uwsgi state=latest
 
 - name: Ensure runs with the latest uwsgi configuration file
-  template: src=uwsgi.ini dest=/opt/launcher/uwsgi.ini
+  template: src=uwsgi.ini dest=/opt/launcher/launcher/uwsgi.ini
   notify:
     - reload supervisor config

@@ -34,4 +34,4 @@
   user: name=celery comment="Celery user" createhome=no
 
 - name: Create celery folder
-  file: path=/opt/celery owner=celery state=directory
+  file: path=/opt/launcher/celery owner=celery state=directory
