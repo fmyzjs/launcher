@@ -1,4 +1,9 @@
 ---
+- name: install packages needed for single server
+  apt: pkg={{item}} install_recommends=yes state=present
+  with_items:
+    - supervisor
+
 - name: Install supervisord
   pip: name=supervisor state=latest
 
@@ -12,7 +17,7 @@
   file: path=/etc/supervisor/conf.d state=directory
 
 - name: Copy supervisor configuration file
-  template: src=supervisord.conf dest=/etc/supervisord.conf
+  template: src=supervisord.conf dest=/etc/supervisor/supervisord.conf
   notify:
     - reload supervisor config
 
@@ -20,9 +25,6 @@
   template: src=launcher.conf dest=/etc/supervisor/conf.d/launcher.conf
   notify:
     - reload supervisor config
-
-- name: Copy supervisor upstart script
-  copy: src=supervisord.conf dest=/etc/init/ owner=root group=root
 
 - name: Start supervisord
   service: name=supervisord state=started
