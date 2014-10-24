@@ -68,6 +68,6 @@
       virtualenv={{venv_dir}}
   with_items:
     - admin_user.json
-    #- sample_projects.json
+    - sample_projects.json
   environment: django_env_vars
   tags: code
