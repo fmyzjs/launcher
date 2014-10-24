@@ -12,7 +12,7 @@
   file: path=/etc/supervisor/conf.d state=directory
 
 - name: Copy supervisor configuration file
-  template: src=supervisord.conf dest=/etc/supervisor/supervisord.conf
+  template: src=supervisord.conf dest=/etc/supervisord.conf
   notify:
     - reload supervisor config
 
