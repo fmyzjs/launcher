@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.5.4
+
+* use correct Intercom app id
+
 ### 1.5.3
 
 * send app url to Intercom
