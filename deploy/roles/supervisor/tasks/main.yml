@@ -5,6 +5,9 @@
 - name: Create a config folder for supervisor
   file: path=/etc/log/supervisor state=directory
 
+- name: Create a conf.d folder for supervisor
+  file: path=/etc/log/supervisor state=directory
+
 - name: Create a log folder for supervisor
   file: path=/etc/supervisor state=directory
 
@@ -14,7 +17,7 @@
     - reload supervisor config
 
 - name: Copy launcher configuration file
-  template: src=launcher.conf dest=/etc/supervisor/launcher.conf
+  template: src=launcher.conf dest=/etc/supervisor/conf.d/launcher.conf
   notify:
     - reload supervisor config
 
