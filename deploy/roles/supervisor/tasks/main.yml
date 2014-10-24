@@ -6,10 +6,10 @@
   file: path=/etc/log/supervisor state=directory
 
 - name: Create a conf.d folder for supervisor
-  file: path=/etc/log/supervisor state=directory
+  file: path=/etc/log/supervisor/ state=directory
 
 - name: Create a log folder for supervisor
-  file: path=/etc/supervisor state=directory
+  file: path=/etc/supervisor/conf.d state=directory
 
 - name: Copy supervisor configuration file
   template: src=supervisord.conf dest=/etc/supervisor/supervisord.conf
