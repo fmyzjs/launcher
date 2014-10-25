@@ -15,10 +15,38 @@
     <!-- Templates -->
     <script type="text/template" id="deploy_form_template">
       {% block extra_deployer_content %}{% endblock extra_deployer_content %}
-      <div id="central-widget">
-          <form class="form-deploy" method="post">
             {% block deployer_form %}
             {% endblock deployer_form %}
+    <div class="modal fade .container-fluid" id="mymodal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
+            <h4 class="modal-title" id="myModalLabel">填写邮箱进行注册</h4>
+          </div>
+          <div class="modal-body">
+            <div class="block_hint_container">
+              <span>当前选择服务:</span>
+              <span id="serviceName">WordPress</span>
+            </div>
+            <div class="from-group">
+              <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                <input type="text" name="email" class="form-control" value="" id="email_input" placeholder="name@bistu.edu.cn">
+              </div>
+              <span class="help-block"></span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="submit" class="btn btn-primary">确定</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div id="central-widget">
+          <form class="form-deploy" method="post">
             <h4>Where can we send the URL?</h4>
             <div class="form-group">
                 <div class="input-group">

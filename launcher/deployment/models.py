@@ -32,6 +32,7 @@ class Project(models.Model):
     name = models.CharField(max_length=100)
     github_url = models.CharField(max_length=200)
     image_name = models.CharField(max_length=300)
+    project_logo = models.CharField(max_length=300)
     ports = models.CharField(max_length=300, help_text="Internally exposed ports separated by spaces, example: 80 8080")
     hostnames = models.CharField(
         max_length=300,

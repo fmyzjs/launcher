@@ -246,7 +246,8 @@ PIPELINE_CSS = {
         'source_filenames': (
             'bootstrap/dist/css/bootstrap.css',
             'bootstrap/dist/css/bootstrap-theme.css',
-            'css/app.css'
+            'css/app.css',
+            'css/index.css',
         ),
         'output_filename': 'css/launcher_main.css',
         'extra_context': {
@@ -279,6 +280,12 @@ PIPELINE_JS = {
         ),
         'output_filename': 'js/countdown.min.js'
 
+    },
+    'index': {
+        'source_filenames': (
+            'js/index.js',
+        ),
+        'output_filename': 'js/index.min.js'
     },
 }
 

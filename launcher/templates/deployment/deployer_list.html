@@ -1,12 +1,24 @@
 {% extends "deployment/deployer_base.html" %}
 
 {% block deployer_form %}
-    <h3 class="form-deploy-heading">Pick a project:</h3>
-    <select name="project" id="project_select" class="form-control">
+    <div id="stackContainer" class="clearfix">
+      <div class="titleContainer">
+        <h3>请选择你要使用的服务</h3>
+      </div>
+
     {% verbatim %}
     <% _.each(projects, function(project) { %>
-        <option value="<%= project.resource_uri %>"><%= project.name %></option>
+      <div class="stack_block">
+        <div class="imageContainer">
+          <img src="/static/img/stack/<%= project.project_logo %>" alt="<%= project.name %>">
+        </div>
+        <div class="textContainer">
+          <span><%= project.name %></span>
+        </div>
+      </div>
     <% }); %>
     {% endverbatim %}
-    </select>
+    </div>
+
 {% endblock deployer_form %}
+
