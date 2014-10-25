@@ -1,7 +1,7 @@
 ---
 
 - name: Install New Relic python library
-  pip: name=newrelic virtualenv=/opt/venv state=latest
+  pip: name=newrelic virtualenv=/opt/launcher/venv state=latest
 
 - name: Generate New Relic config
   command: "{{venv_dir}}/bin/newrelic-admin generate-config {{newrelic_license_key}} newrelic.ini chdir={{django_project_dir}}"
