@@ -10,11 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     {% compressed_css 'launcher_main' %}
+    {% compressed_js 'index' %}
+
     {% block extra_css %}{% endblock extra_css %}
     {% compressed_js 'launcher_main' %}
+    {% compressed_css 'index' %}
+
+
   </head>
   <body>
-    <div class="container" id="wholePage">
+    <div id="wholePage">
       {% block content %}{% endblock %}
     </div> <!-- /container -->
 
@@ -22,7 +27,6 @@
     {% endblock js_templates %}
 
     {% block extra_js %}
-    <script src="/static/js/index.js"></script>
 
     {% endblock extra_js %}
   </body>

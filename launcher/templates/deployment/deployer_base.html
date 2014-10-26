@@ -3,31 +3,31 @@
 {% load static from staticfiles %}
 
 {% block extra_js %}
-    <script src="http://js.pusher.com/2.1/pusher.min.js"></script>
+
+    {% compressed_js 'index' %}
+    <script src="/static/js/pusher.min.js"></script>
     {% compressed_js 'app' %}
     <script>
       apps = {{ apps|safe }};
     </script>
-{% endblock extra_js %}
-
+    {% endblock extra_js %}
 
 {% block js_templates %}
     <!-- Templates -->
     <script type="text/template" id="deploy_form_template">
-      {% block extra_deployer_content %}{% endblock extra_deployer_content %}
-            {% block deployer_form %}
-            {% endblock deployer_form %}
-    <div class="modal fade .container-fluid" id="mymodal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade .container-fluid" id="mymodal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-sm">
-        <div class="modal-content">
+        <div class="modal-content" id="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
             <h4 class="modal-title" id="myModalLabel">填写邮箱进行注册</h4>
           </div>
           <div class="modal-body">
+          <form class="form-deploy" method="post">
             <div class="block_hint_container">
               <span>当前选择服务:</span>
               <span id="serviceName">WordPress</span>
+              <input id="serviceUri" type="hidden" value="" />
             </div>
             <div class="from-group">
               <div class="input-group">
@@ -36,36 +36,30 @@
               </div>
               <span class="help-block"></span>
             </div>
+            <button class="btn btn-success" type="submit">Launch demo site</button>
+          </form>
+
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-            <button type="submit" class="btn btn-primary">确定</button>
-          </div>
-        </div>
       </div>
     </div>
 
-      <div id="central-widget">
-          <form class="form-deploy" method="post">
-            <h4>Where can we send the URL?</h4>
-            <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-                  <input type="text" name="email" class="form-control" value="" id="email_input" placeholder="name@domain.com">
-                </div>
-                <span class="help-block"></span>
-            </div>
-            <button class="btn btn-success" type="submit">Launch demo site</button>
-          </form>
           {% block form_extra_text %}{% endblock form_extra_text %}
-      </div> 
+        </div>
+      {% block extra_deployer_content %}{% endblock extra_deployer_content %}
+      {% block deployer_form %}
+      {% endblock deployer_form %}
+
     </script>
 
+
     <script type="text/template" id="deploy_status_template">
-    <div id="central-widget">
+
+<div class="modal fade .container-fluid in" id="mymodal" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+      <div class="modal-dialog modal-sm" style="margin-top: 59.5833333333333px;">
+        <div class="modal-content" id="modal-content">
       <div class="form-deploy">
         <img src="{% static "img/ajax-loader.gif" %}" alt="loader" class="spinner">
-        <h3>Deploying <%= app_name %></h3>
+        <h4 class="modal-title" id="myModalLabel">Deploying <%= app_name %></h4>
         <div class="progress progress-striped active">
           <div class="progress-bar" role="progressbar" style="width: 5%;" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100">
               <span class="sr-only">5% Complete</span>
@@ -81,5 +75,7 @@
         </p>
       </div>
     </div>
+  </div>
+</div>
     </script>
 {% endblock js_templates %}

@@ -13,7 +13,8 @@
           <img src="/static/img/stack/<%= project.project_logo %>" alt="<%= project.name %>">
         </div>
         <div class="textContainer">
-          <span><%= project.name %></span>
+          <span value="<%= project.resource_uri %>"><%= project.name %></span>
+          <input type="hidden" value="<%= project.resource_uri %>" />
         </div>
       </div>
     <% }); %>
@@ -21,4 +22,5 @@
     </div>
 
 {% endblock deployer_form %}
+
 

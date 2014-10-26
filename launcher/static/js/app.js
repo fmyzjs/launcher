@@ -30,7 +30,7 @@ App.Deployment = Backbone.Model.extend({
 
 // Views
 App.DeployFormView = Backbone.View.extend({
-    el: $('.container'),
+    el: $('#wholePage'),
 
     events: {
         "submit form.form-deploy": "deploy"
@@ -64,7 +64,7 @@ App.DeployFormView = Backbone.View.extend({
     },
 
     get_app_data: function() {
-        var project = this.project || this.projects.findWhere({'resource_uri': this.$('select[name=project]').val()});
+        var project = this.project || this.projects.findWhere({'resource_uri': this.$('#serviceUri').val()});
         return {
             'project_uri': project.get('resource_uri'),
             'app_name': project.get('name'),
@@ -115,20 +115,22 @@ App.DeployFormView = Backbone.View.extend({
 });
 
 App.DeployStatusView = Backbone.View.extend({
-    el: $(".container"),
+    el: $("#wholePage"),
     template: _.template($("#deploy_status_template").html()),
     initialize: function(app_data) {
         this.app_data = app_data;
 
         // Pusher channel
-        this.channel = App.pusher.subscribe(this.app_data['deploy_id']);
-        this.channel.bind('info_update', this.updateInfoStatus);
-        this.channel.bind('deployment_complete', this.deploymentSuccess);
-        this.channel.bind('deployment_failed', this.deploymentFail);
+        //this.channel = App.pusher.subscribe(this.app_data['deploy_id']);
+        //this.channel.bind('info_update', this.updateInfoStatus);
+        //this.channel.bind('deployment_complete', this.deploymentSuccess);
+        //this.channel.bind('deployment_failed', this.deploymentFail);
     },
     render: function(){
         var html = this.template(this.app_data);
         this.$el.html(html);
+        this.$el.removeClass("modal-backdrop");
+
         //Intercom('update');
     },
     updateInfoStatus: function(data) {
@@ -226,4 +228,38 @@ $(function(){
     if(App.deployFormView.showEmbedButtons === true) {
         App.embedView = new App.EmbedView({el: '#embed-buttons'});
     }
+  "use strict";
+
+  var loginContainer = $("#loginContainer");
+
+  $('.stack_block').click(function() {
+    var currentSelect = $(this).find('span').text();
+    var currentSelectUri = $(this).find('input').val();
+    // loginContainer.removeClass('hidden');
+    console.log(currentSelectUri);
+    console.log(currentSelect);
+    $('#mymodal').modal();
+    $('#serviceName').text(currentSelect);
+    $('#serviceUri').val(currentSelectUri);
+  });
+
+  $('#loginCancelBtn').click(function() {
+    // loginContainer.addClass('hidden');
+  });
+
+  function centerModal() {
+    $(this).css('display', 'block');
+    var $dialog = $(this).find(".modal-dialog");
+    var offset = ($(window).height() - $dialog.height()) / 2.4;
+    // Center modal vertically in window
+    $dialog.css("margin-top", offset);
+  }
+
+  $('.modal').on('show.bs.modal', centerModal);
+
+  $(window).on("resize", function () {
+    $('.modal:visible').each(centerModal);
+  });
 });
+
+
