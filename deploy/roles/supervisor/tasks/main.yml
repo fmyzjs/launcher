@@ -1,9 +1,9 @@
 ---
 - name: Install supervisord
-  pip: name=supervisor state=latest
+  pip: name=supervisor virtualenv=/opt/supervisor/venv 
 
 - name: Copy supervisor configuration file
-  template: src=supervisord.conf dest=/etc/supervisord.conf
+  template: src=supervisord.conf dest=/opt/supervisor/supervisord.conf
   notify:
     - reload supervisor config
 
