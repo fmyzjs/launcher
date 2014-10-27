@@ -3,7 +3,7 @@ app_name: launcher
 git_repo_url: https://github.com/fmyzjs/launcher.git
 git_repo_branch: eduStack
 git_repo_dir: /opt/launcher/launcher
-server_name: edustack.bistu.edu.cn
+server_name: launch.bistu.edu.cn
 venv_dir: /opt/launcher/venv
 
 # memcached config
