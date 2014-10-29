@@ -121,10 +121,10 @@ App.DeployStatusView = Backbone.View.extend({
         this.app_data = app_data;
 
         // Pusher channel
-        //this.channel = App.pusher.subscribe(this.app_data['deploy_id']);
-        //this.channel.bind('info_update', this.updateInfoStatus);
-        //this.channel.bind('deployment_complete', this.deploymentSuccess);
-        //this.channel.bind('deployment_failed', this.deploymentFail);
+        this.channel = App.pusher.subscribe(this.app_data['deploy_id']);
+        this.channel.bind('info_update', this.updateInfoStatus);
+        this.channel.bind('deployment_complete', this.deploymentSuccess);
+        this.channel.bind('deployment_failed', this.deploymentFail);
     },
     render: function(){
         var html = this.template(this.app_data);
@@ -144,7 +144,7 @@ App.DeployStatusView = Backbone.View.extend({
         $("img.spinner").hide();
         $(".survey").hide();
         var $info = $("#info-message-section");
-        $(".form-deploy h3").text("Deployed " + data['app_name']);
+        $(".modal-title h4").text("Deployed " + data['app_name']);
         $info.removeClass('alert-info').addClass('alert-success');
         $info.html('<span class="glyphicon glyphicon-ok"></span> ' + data['message']);
         var urls = [];

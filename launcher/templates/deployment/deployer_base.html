@@ -5,7 +5,7 @@
 {% block extra_js %}
 
     {% compressed_js 'index' %}
-    <script src="/static/js/pusher.min.js"></script>
+    <script src="http://js.pusher.com/2.1/pusher.min.js"></script>
     {% compressed_js 'app' %}
     <script>
       apps = {{ apps|safe }};

@@ -45,8 +45,8 @@ DATABASES = {
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = [
-    'launch.bistu.edu.cn'
-    '.edustack.bistu.edu.cn'
+    'launch.bistu.edu.cn',
+    '.edustack.bistu.edu.cn',
     '.idefs.net',
     '127.0.0.1',
 ]
