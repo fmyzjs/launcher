@@ -47,7 +47,6 @@ class Project(models.Model):
     default_username = models.CharField(max_length=30, blank=True)
     default_password = models.CharField(max_length=30, blank=True)
     survey_form_url = models.URLField(blank=True)
-
     class Meta:
         ordering = ['name']
 
@@ -134,7 +133,7 @@ class Deployment(models.Model):
         hostnames = self.project.hostnames.split(' ')
         payload = {
             "image": self.project.image_name,
-            "hosts": ["/api/v1/hosts/1/"],
+            "hosts": ["/api/v1/hosts/3/"],
             "ports": ports,
             "command": "",
             "links": "",
@@ -143,8 +142,10 @@ class Deployment(models.Model):
         }
         if "edx" in self.project.name.lower():
             edx_env = []
-            edx_env.append("EDX_LMS_BASE=lms-{0}.{1}".format(self.deploy_id, settings.APP_DOMAIN))
-            edx_env.append("EDX_PREVIEW_LMS_BASE=lms-{0}.{1}".format(self.deploy_id), settings.APP_DOMAIN)
+            LMS = "lms-{0}.{1}".format(self.deploy_id, settings.APP_DOMAIN)
+            CMS = "cms-{0}.{1}".format(self.deploy_id, settings.APP_DOMAIN)
+            edx_env.append("EDX_LMS_BASE={0}".format(LMS))
+            edx_env.append("EDX_PREVIEW_LMS_BASE={0}".format(CMS))
             edx_env.append("EDX_CMS_BASE=cms-{0}.{1}".format(self.deploy_id, settings.APP_DOMAIN))
             edx_env.append("INTERCOM_APP_ID={0}".format(settings.INTERCOM_EDX_APP_ID))
             edx_env.append("INTERCOM_APP_SECRET={0}".format(settings.INTERCOM_EDX_APP_SECRET))
