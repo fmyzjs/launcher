@@ -143,7 +143,7 @@ class Deployment(models.Model):
         if "edx" in self.project.name.lower():
             edx_env = []
             LMS = "lms-{0}.{1}".format(self.deploy_id, settings.APP_DOMAIN)
-            CMS = "cms-{0}.{1}".format(self.deploy_id, settings.APP_DOMAIN)
+            CMS = "studio-{0}.{1}".format(self.deploy_id, settings.APP_DOMAIN)
             edx_env.append("EDX_LMS_BASE={0}".format(LMS))
             edx_env.append("EDX_PREVIEW_LMS_BASE={0}".format(CMS))
             edx_env.append("EDX_CMS_BASE=cms-{0}.{1}".format(self.deploy_id, settings.APP_DOMAIN))
