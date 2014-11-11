@@ -227,7 +227,7 @@ window.location.assign(this);
         var $info = $("#info-message-section");
         $info.removeClass('alert-info').addClass('alert-danger');
         $info.html('<span class="glyphicon glyphicon-remove"></span> ' + data['message']);
-        Intercom('update');
+        //Intercom('update');
     }
 });
 
