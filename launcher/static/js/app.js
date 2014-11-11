@@ -20,12 +20,14 @@ App.Deployment = Backbone.Model.extend({
     validate: function(attrs, options) {
         var re = /\S+@\S+\.\S+/;
         if(attrs.email === "" || !re.test(attrs.email)) {
-            return "You must enter an email address!";
+            return "您必须输入Email!";
         }
+
         if(attrs.email.length > 60) {
-            return "You've entered an email address that is too long (>60 characters)";
+            return "您输入的Email地址太长了 (>60 字符)";
         }
     }
+
 });
 
 // Views
@@ -98,17 +100,71 @@ App.DeployFormView = Backbone.View.extend({
             email: email,
             deploy_id: deploy_id
         });
+        var self = this;
         if(deploy.isValid()) {
-            App.deployStatusView = new App.DeployStatusView(app_data);
-            App.deployStatusView.render();
-            deploy.save({}, {
-                error: App.deployStatusView.deploymentFail
+            checkEmail(email, function(err, isOk) {
+                if (err) {
+                  validFail('出错了:' + err);
+                } else {
+                  if (isOk) {
+                    App.deployStatusView = new App.DeployStatusView(app_data);
+                    App.deployStatusView.render();
+                    deploy.save({}, {
+                        error: App.deployStatusView.deploymentFail
+                    });
+                  } else {
+                    validFail('您的邮箱未注册!');
+                  }
+                }
             });
         }
         else {
-            this.$('div.form-group').addClass('has-error');
+          validFail();
+        }
+
+        function validFail(msg) {
+            console.log('valid fail!');
+            self.$('div.form-group').addClass('has-error');
             var $errorMessage = $(".help-block");
-            $errorMessage.text(deploy.validationError);
+            if (!!msg) {
+              $errorMessage.text(msg);
+            } else {
+              $errorMessage.text(deploy.validationError);
+            }
+        }
+
+        function checkEmail(email, callback) {
+          var xhr = new XMLHttpRequest();
+          var url = 'http://launch.bistu.edu.cn/email/esEmail.txt';
+          xhr.open('GET', url, false);
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+              if (xhr.status === 200) {
+                var res = xhr.responseText;
+                var items = null;
+                var item = null;
+                try {
+                  items = JSON.parse(res);
+                  for (var i = 0, len = items.length; i < len; i++) {
+                    item = items[i];
+                    if (email.toLowerCase() === item['email'].toLowerCase()) {
+                      // equal
+                      callback(null, true);
+                      break;
+                    }
+                  }
+                  // not equal
+                  callback(null, false);
+                } catch (e) {
+                  console.log(e);
+                }
+              } else {
+                callback(new Error('connect fail'));
+              }
+            }
+          };
+
+          xhr.send();
         }
     }
 
@@ -144,20 +200,21 @@ App.DeployStatusView = Backbone.View.extend({
         $("img.spinner").hide();
         $(".survey").hide();
         var $info = $("#info-message-section");
-        $(".modal-title h4").text("Deployed " + data['app_name']);
+        $(".modal-title h4").text("已经生成 " + data['app_name']);
         $info.removeClass('alert-info').addClass('alert-success');
         $info.html('<span class="glyphicon glyphicon-ok"></span> ' + data['message']);
         var urls = [];
         $.each(data.app_url.split(" "), function() {
             var app_link = $('<p><a class="app-url" href="' + this + '">' + this + '</a></p>');
+window.location.assign(this);
             urls.push(app_link);
         });
         $info.after(urls);
 
         if(data['username'] || data['password']) {
-            var auth_data = '<div class="alert alert-info auth-details">Authentication details<br/>' +
-                            '<strong>Username:</strong> ' + data['username'] + '<br/>' +
-                            '<strong>Password:</strong> ' + data['password'] +
+            var auth_data = '<div class="alert alert-info auth-details">认证信息<br/>' +
+                            '<strong>用户名:</strong> ' + data['username'] + '<br/>' +
+                            '<strong>密码:</strong> ' + data['password'] +
                             '</div>';
             $(auth_data).insertAfter($info);
         }

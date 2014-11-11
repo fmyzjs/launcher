@@ -23,17 +23,17 @@ $(function(){
     {% if object.status == 'Completed' %}
       <h2>{{ object.project.name }} deploy completed</h2>
       <div class="alert alert-success" id="info-message-section">
-        <span class="glyphicon glyphicon-wrench"></span><span id="info-message"> Successfully deployed!</span>
+        <span class="glyphicon glyphicon-wrench"></span><span id="info-message"> 成功生成!</span>
       </div>
       {% if username or password %}
       <div class="alert alert-info auth-details">
-        Authentication details<br/>
-        <strong>Username:</strong> {{ username }} <br/>
-        <strong>Password:</strong> {{ password }}
+        认证信息<br/>
+        <strong> 用户名:</strong> {{ username }} <br/>
+        <strong> 密码:</strong> {{ password }}
       </div>
       {% endif %}
       <p><a class="app-url" href="{{ object.url }}">{{ object.url }}</a></p>
-      <p><strong id="minutes">{{ remaining }}</strong> remaining to evaluate {{ object.project.name }}</p>
+      <p><strong id="minutes"> 您还有 {{ remaining }} 分钟 </strong> 来测试 {{ object.project.name }}</p>
       {% if remaining > 0 %}
       <div class="progress progress-striped active remaining-progress">
         <div class="progress-bar" style="width: {{ percentage }}%;"></div>
@@ -42,13 +42,13 @@ $(function(){
     {% elif object.status == 'Failed' %}
       <h3>{{ object.project.name }} deploy failed</h3>
       <div class="alert alert-error" id="info-message-section">
-        <span class="glyphicon glyphicon-remove"></span><span id="info-message"> There's been an error during deployment</span>
+        <span class="glyphicon glyphicon-remove"></span><span id="info-message"> 生成过程中发生了错误！</span>
       </div>
-      <p class="error_message">{{ object.project.name }} couldn't be deployed</p>
+      <p class="error_message">无法生成 {{ object.project.name }}</p>
     {% elif object.status == 'Expired' %}
         <h3>{{ object.project.name }} expired!</h3>
         <div class="alert" id="info-message-section">
-            <span class="glyphicon glyphicon-time"></span><span id="info-message"> Your timed trial of the application has expired.</span>
+            <span class="glyphicon glyphicon-time"></span><span id="info-message"> 您的应用已经被删除</span>
         </div>
     {% endif %}
     </div>
