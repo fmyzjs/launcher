@@ -143,13 +143,10 @@ class Deployment(models.Model):
         if "edx" in self.project.name.lower():
             edx_env = []
             LMS = "lms-{0}.{1}".format(self.deploy_id, settings.APP_DOMAIN)
-            CMS = "studio-{0}.{1}".format(self.deploy_id, settings.APP_DOMAIN)
+            CMS = "cms-{0}.{1}".format(self.deploy_id, settings.APP_DOMAIN)
             edx_env.append("EDX_LMS_BASE={0}".format(LMS))
             edx_env.append("EDX_PREVIEW_LMS_BASE={0}".format(CMS))
             edx_env.append("EDX_CMS_BASE=cms-{0}.{1}".format(self.deploy_id, settings.APP_DOMAIN))
-            edx_env.append("INTERCOM_APP_ID={0}".format(settings.INTERCOM_EDX_APP_ID))
-            edx_env.append("INTERCOM_APP_SECRET={0}".format(settings.INTERCOM_EDX_APP_SECRET))
-            edx_env.append("INTERCOM_USER_EMAIL={0}".format(self.email))
             env_string = " ".join(edx_env)
             env_string = " " + env_string
             payload['environment'] += env_string

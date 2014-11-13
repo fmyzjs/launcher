@@ -307,7 +307,7 @@ CUSTOMERIO_SITE_ID = get_env_variable('CUSTOMERIO_SITE_ID')
 CUSTOMERIO_API_KEY = get_env_variable('CUSTOMERIO_API_KEY')
 
 # Intercom.io settings
-USE_INTERCOM = get_env_variable('USE_INTERCOM')
+USE_INTERCOM = False
 if USE_INTERCOM:
     INTERCOM_APP_ID = get_env_variable('INTERCOM_APP_ID')
     INTERCOM_API_KEY = get_env_variable('INTERCOM_API_KEY')
