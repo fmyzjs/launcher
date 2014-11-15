@@ -206,15 +206,21 @@ App.DeployStatusView = Backbone.View.extend({
         var urls = [];
         $.each(data.app_url.split(" "), function() {
             var app_link = $('<p><a class="app-url" href="' + this + '">' + this + '</a></p>');
-window.location.assign(this);
-            urls.push(app_link);
+//window.location.assign(this);
+//            urls.push(app_link);
         });
-        $info.after(urls);
+//        $info.after(urls);
 
+	var urls = data.app_url.split(' ');
+	var urlHtml = '';
+	urls.forEach(function(val) {
+          urlHtml += '<p><a class="app-url" href="' + val + '" target="_blank">' + val + '</a></p>';
+        });
         if(data['username'] || data['password']) {
             var auth_data = '<div class="alert alert-info auth-details">认证信息<br/>' +
                             '<strong>用户名:</strong> ' + data['username'] + '<br/>' +
-                            '<strong>密码:</strong> ' + data['password'] +
+                            '<strong>密码:</strong> ' + data['password'] + '<br/>' +
+			    '<strong>应用地址:</strong><br/>' + urlHtml +
                             '</div>';
             $(auth_data).insertAfter($info);
         }
