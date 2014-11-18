@@ -203,6 +203,7 @@ App.DeployStatusView = Backbone.View.extend({
         $(".modal-title h4").text("已经生成 " + data['app_name']);
         $info.removeClass('alert-info').addClass('alert-success');
         $info.html('<span class="glyphicon glyphicon-ok"></span> ' + data['message']);
+/*
         var urls = [];
         $.each(data.app_url.split(" "), function() {
             var app_link = $('<p><a class="app-url" href="' + this + '">' + this + '</a></p>');
@@ -210,20 +211,24 @@ App.DeployStatusView = Backbone.View.extend({
 //            urls.push(app_link);
         });
 //        $info.after(urls);
+*/
 
 	var urls = data.app_url.split(' ');
 	var urlHtml = '';
 	urls.forEach(function(val) {
           urlHtml += '<p><a class="app-url" href="' + val + '" target="_blank">' + val + '</a></p>';
         });
+        var renderData = '';
         if(data['username'] || data['password']) {
-            var auth_data = '<div class="alert alert-info auth-details">认证信息<br/>' +
+            renderData = '<div class="alert alert-info auth-details">认证信息<br/>' +
                             '<strong>用户名:</strong> ' + data['username'] + '<br/>' +
                             '<strong>密码:</strong> ' + data['password'] + '<br/>' +
 			    '<strong>应用地址:</strong><br/>' + urlHtml +
                             '</div>';
-            $(auth_data).insertAfter($info);
+        } else {
+            renderData = '<div class="alert alert-info auth=details"><br/><strong>应用地址:</strong><br/>' + urlHtml + '</div>';
         }
+        $(renderData).insertAfter($info);
         //Intercom('update');
 },
 
